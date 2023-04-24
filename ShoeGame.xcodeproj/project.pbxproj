@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BD9A704429F73C84000A265D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BD9A704329F73C84000A265D /* .gitignore */; };
-		BD9A704829F73E9E000A265D /* testfile.txt in Resources */ = {isa = PBXBuildFile; fileRef = BD9A704729F73E9E000A265D /* testfile.txt */; };
+		BD9A704A29F73F68000A265D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD9A704929F73F68000A265D /* GoogleService-Info.plist */; };
 		BDBC111B29F738A000D65074 /* ShoeGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111A29F738A000D65074 /* ShoeGameApp.swift */; };
 		BDBC111D29F738A000D65074 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111C29F738A000D65074 /* ContentView.swift */; };
 		BDBC111F29F738A000D65074 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBC111E29F738A000D65074 /* Assets.xcassets */; };
@@ -21,7 +21,7 @@
 
 /* Begin PBXFileReference section */
 		BD9A704329F73C84000A265D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		BD9A704729F73E9E000A265D /* testfile.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testfile.txt; sourceTree = "<group>"; };
+		BD9A704929F73F68000A265D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDBC111729F738A000D65074 /* ShoeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBC111A29F738A000D65074 /* ShoeGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeGameApp.swift; sourceTree = "<group>"; };
 		BDBC111C29F738A000D65074 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +55,7 @@
 		BD9A704029F73C32000A265D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD9A704929F73F68000A265D /* GoogleService-Info.plist */,
 				BDBC111E29F738A000D65074 /* Assets.xcassets */,
 				BDBC112029F738A000D65074 /* Preview Content */,
 			);
@@ -84,7 +85,6 @@
 				BD9A704029F73C32000A265D /* Resources */,
 				BD9A703F29F73C20000A265D /* Views */,
 				BD9A704329F73C84000A265D /* .gitignore */,
-				BD9A704729F73E9E000A265D /* testfile.txt */,
 			);
 			path = ShoeGame;
 			sourceTree = "<group>";
@@ -165,8 +165,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDBC112229F738A000D65074 /* Preview Assets.xcassets in Resources */,
+				BD9A704A29F73F68000A265D /* GoogleService-Info.plist in Resources */,
 				BD9A704429F73C84000A265D /* .gitignore in Resources */,
-				BD9A704829F73E9E000A265D /* testfile.txt in Resources */,
 				BDBC111F29F738A000D65074 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,7 +307,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ShoeGame/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "ShoeGame/Resources/Preview\\ Content";
 				DEVELOPMENT_TEAM = QQC7URH972;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -337,7 +337,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ShoeGame/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "ShoeGame/Resources/Preview\\ Content";
 				DEVELOPMENT_TEAM = QQC7URH972;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
