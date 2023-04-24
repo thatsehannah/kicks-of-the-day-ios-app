@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD9A704429F73C84000A265D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BD9A704329F73C84000A265D /* .gitignore */; };
 		BDBC111B29F738A000D65074 /* ShoeGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111A29F738A000D65074 /* ShoeGameApp.swift */; };
 		BDBC111D29F738A000D65074 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111C29F738A000D65074 /* ContentView.swift */; };
 		BDBC111F29F738A000D65074 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBC111E29F738A000D65074 /* Assets.xcassets */; };
@@ -15,16 +16,15 @@
 		BDBC112C29F739AC00D65074 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BDBC112B29F739AC00D65074 /* FirebaseAuth */; };
 		BDBC112E29F739AC00D65074 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BDBC112D29F739AC00D65074 /* FirebaseFirestore */; };
 		BDBC113029F739AC00D65074 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BDBC112F29F739AC00D65074 /* FirebaseFirestoreSwift */; };
-		BDBC113229F739CB00D65074 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDBC113129F739CB00D65074 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD9A704329F73C84000A265D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		BDBC111729F738A000D65074 /* ShoeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBC111A29F738A000D65074 /* ShoeGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeGameApp.swift; sourceTree = "<group>"; };
 		BDBC111C29F738A000D65074 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BDBC111E29F738A000D65074 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDBC112129F738A000D65074 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		BDBC113129F739CB00D65074 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +42,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD9A703F29F73C20000A265D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BDBC111C29F738A000D65074 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BD9A704029F73C32000A265D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BDBC111E29F738A000D65074 /* Assets.xcassets */,
+				BDBC112029F738A000D65074 /* Preview Content */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		BDBC110E29F7389F00D65074 = {
 			isa = PBXGroup;
 			children = (
@@ -62,10 +79,9 @@
 			isa = PBXGroup;
 			children = (
 				BDBC111A29F738A000D65074 /* ShoeGameApp.swift */,
-				BDBC111C29F738A000D65074 /* ContentView.swift */,
-				BDBC111E29F738A000D65074 /* Assets.xcassets */,
-				BDBC113129F739CB00D65074 /* GoogleService-Info.plist */,
-				BDBC112029F738A000D65074 /* Preview Content */,
+				BD9A704029F73C32000A265D /* Resources */,
+				BD9A703F29F73C20000A265D /* Views */,
+				BD9A704329F73C84000A265D /* .gitignore */,
 			);
 			path = ShoeGame;
 			sourceTree = "<group>";
@@ -146,8 +162,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDBC112229F738A000D65074 /* Preview Assets.xcassets in Resources */,
+				BD9A704429F73C84000A265D /* .gitignore in Resources */,
 				BDBC111F29F738A000D65074 /* Assets.xcassets in Resources */,
-				BDBC113229F739CB00D65074 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
