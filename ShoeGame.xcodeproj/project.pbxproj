@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD9A704429F73C84000A265D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BD9A704329F73C84000A265D /* .gitignore */; };
 		BD9A704A29F73F68000A265D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD9A704929F73F68000A265D /* GoogleService-Info.plist */; };
+		BD9A704D29F7498A000A265D /* Shoe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A704C29F7498A000A265D /* Shoe.swift */; };
 		BDBC111B29F738A000D65074 /* ShoeGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111A29F738A000D65074 /* ShoeGameApp.swift */; };
 		BDBC111D29F738A000D65074 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111C29F738A000D65074 /* ContentView.swift */; };
 		BDBC111F29F738A000D65074 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBC111E29F738A000D65074 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		BD9A704329F73C84000A265D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		BD9A704929F73F68000A265D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BD9A704C29F7498A000A265D /* Shoe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoe.swift; sourceTree = "<group>"; };
 		BDBC111729F738A000D65074 /* ShoeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBC111A29F738A000D65074 /* ShoeGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeGameApp.swift; sourceTree = "<group>"; };
 		BDBC111C29F738A000D65074 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		BD9A704B29F7494A000A265D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD9A704C29F7498A000A265D /* Shoe.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BDBC110E29F7389F00D65074 = {
 			isa = PBXGroup;
 			children = (
@@ -81,10 +91,11 @@
 		BDBC111929F738A000D65074 /* ShoeGame */ = {
 			isa = PBXGroup;
 			children = (
-				BDBC111A29F738A000D65074 /* ShoeGameApp.swift */,
+				BD9A704B29F7494A000A265D /* Models */,
 				BD9A704029F73C32000A265D /* Resources */,
 				BD9A703F29F73C20000A265D /* Views */,
 				BD9A704329F73C84000A265D /* .gitignore */,
+				BDBC111A29F738A000D65074 /* ShoeGameApp.swift */,
 			);
 			path = ShoeGame;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD9A704D29F7498A000A265D /* Shoe.swift in Sources */,
 				BDBC111D29F738A000D65074 /* ContentView.swift in Sources */,
 				BDBC111B29F738A000D65074 /* ShoeGameApp.swift in Sources */,
 			);
