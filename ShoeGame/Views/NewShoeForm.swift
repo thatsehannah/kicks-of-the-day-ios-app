@@ -11,12 +11,9 @@ struct NewShoeForm: View {
     typealias CreateAction = (Shoe) -> Void
     
     let createAction: CreateAction
-    @State private var shoe = Shoe(brand: .jordan, model: "", colorWay: "", gender: "Mens", size: 8.5, dominantMaterial: .canvas, wornTotal: 0, currentCondition: "A", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor], dateAdded: Date()), isFavorite: false, currentPhoto: "", currentlyWearing: false)
+    @State private var shoe = Shoe()
     @Environment(\.dismiss) var dismiss
-    
-    private let conditionGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"]
-    private let sizeRange = Array(stride(from: 4.0, through: 22, by: 0.5))
-    
+        
     private func saveShoe() {
         createAction(shoe)
     }
@@ -56,11 +53,13 @@ struct NewShoeForm: View {
             Section {
                 HStack(spacing: 10) {
                     Picker("Size", selection: $shoe.gender) {
-                        Text("Mens").tag("Mens")
-                        Text("Womens").tag("Womens")
+                        ForEach(Shoe.genders, id: \.self) { gender in
+                            Text("\(gender)")
+                        }
+                        
                     }
                     Picker("", selection: $shoe.size) {
-                        ForEach(sizeRange, id: \.self) { sz in
+                        ForEach(Shoe.sizeRanges, id: \.self) { sz in
                             Text(String(format: "%.1f", sz))
                         }
                     }
@@ -69,7 +68,7 @@ struct NewShoeForm: View {
             }
             Section {
                 Picker("Condition", selection: $shoe.currentCondition) {
-                    ForEach(conditionGrades, id: \.self) { grade in
+                    ForEach(Shoe.conditionGrades, id: \.self) { grade in
                         Text("\(grade)")
                     }
                 }
@@ -78,6 +77,12 @@ struct NewShoeForm: View {
         .navigationTitle("Add To Collection")
         .navigationBarBackButtonHidden(true)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel", action: {
+                    dismiss()
+                })
+                .font(.body)
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save", action: {
                     saveShoe()
@@ -85,13 +90,7 @@ struct NewShoeForm: View {
                 })
                 .padding(.leading)
                 .font(.body)
-                .disabled(true) //gonna create a valid checker to to pass here
-            }
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel", action: {
-                    dismiss()
-                })
-                .font(.body)
+                .disabled(shoe.brand == .none || shoe.model.isEmpty || shoe.colorWay.isEmpty || shoe.dominantMaterial == .none)
             }
         }
     }

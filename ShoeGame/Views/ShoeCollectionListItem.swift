@@ -45,7 +45,7 @@ private struct ShoeImageView: View {
         Image(imageName)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 120)
+            .frame(width: 120, height: 80)
     }
 }
 
@@ -53,6 +53,11 @@ struct ShoeCollectionListItem_Previews: PreviewProvider {
     static var previews: some View {
         List {
             ShoeCollectionListItem(shoe: Shoe.shoe1)
+        }
+
+        //shoe with no image
+        List {
+            ShoeCollectionListItem(shoe: Shoe(brand: .adidas, model: "Yeezy 700", colorWay: "WaveRunner", gender: Shoe.genders[0], size: Shoe.sizeRanges[12], dominantMaterial: .nubuck, wornTotal: 0, currentCondition: Shoe.conditionGrades[3], shoeHistory: ShoeHistory(lastActivityWorn: [.none], dateAdded: Date()), isFavorite: false, currentlyWearing: false))
         }
         
     }

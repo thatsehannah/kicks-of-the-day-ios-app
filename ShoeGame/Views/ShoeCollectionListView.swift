@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ShoeCollectionListView: View {
-    private var shoes = Shoe.shoes
+    @StateObject var viewModel = ShoeViewModel()
     
     var body: some View {
         NavigationView {
-            List(shoes) { shoe in
+            List(viewModel.shoes) { shoe in
                 ShoeCollectionListItem(shoe: shoe)
             }
             .navigationTitle("Your Collection")
             .toolbar {
-                NavigationLink(destination: NewShoeForm()) {
+                NavigationLink(destination: NewShoeForm(createAction: viewModel.makeCreateAction())) {
                     Image(systemName: "plus")
                 }
             }
