@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct NewShoeForm: View {
+    typealias CreateAction = (Shoe) -> Void
+    
+    let createAction: CreateAction
     @State private var shoe = Shoe(brand: .jordan, model: "", colorWay: "", gender: "Mens", size: 8.5, dominantMaterial: .canvas, wornTotal: 0, currentCondition: "A", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor], dateAdded: Date()), isFavorite: false, currentPhoto: "", currentlyWearing: false)
     @Environment(\.dismiss) var dismiss
     
-    let conditionGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"]
-    let sizeRange = Array(stride(from: 4.0, through: 22, by: 0.5))
+    private let conditionGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"]
+    private let sizeRange = Array(stride(from: 4.0, through: 22, by: 0.5))
+    
+    private func saveShoe() {
+        createAction(shoe)
+    }
     
     var body: some View {
         Form {
@@ -73,7 +80,7 @@ struct NewShoeForm: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save", action: {
-                    //save shoe to collection
+                    saveShoe()
                     dismiss()
                 })
                 .padding(.leading)
@@ -93,7 +100,7 @@ struct NewShoeForm: View {
 struct NewShoeForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NewShoeForm()
+            NewShoeForm(createAction: { _ in })
         }
         
     }
