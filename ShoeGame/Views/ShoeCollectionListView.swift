@@ -16,6 +16,11 @@ struct ShoeCollectionListView: View {
                 ShoeCollectionListItem(shoe: shoe)
             }
             .navigationTitle("Your Collection")
+            .toolbar {
+                NavigationLink(destination: NewShoeForm()) {
+                    Image(systemName: "plus")
+                }
+            }
         }
         
     }
