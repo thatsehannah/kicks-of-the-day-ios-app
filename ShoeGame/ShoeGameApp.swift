@@ -16,7 +16,7 @@ struct ShoeGameApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ShoeCollectionListView()
         }
     }
 }
