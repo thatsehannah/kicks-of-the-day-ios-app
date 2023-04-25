@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Shoe: Identifiable {
+struct Shoe: Identifiable, Codable {
     var id = UUID()
     var brand: Brands
     var model: String
@@ -23,6 +23,10 @@ struct Shoe: Identifiable {
     var isFavorite: Bool
     var currentPhoto: String? //not sure if this will be an url
     var currentlyWearing: Bool
+    
+    static let genders = ["Mens", "Womens", "Kids"]
+    static let conditionGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"]
+    static let sizeRanges = Array(stride(from: 3.5, through: 22, by: 0.5))
     
     init(id: UUID = UUID(), brand: Brands, model: String, colorWay: String, styleNumber: String? = nil, gender: String, size: Double, pricePaid: Double? = nil, dominantMaterial: MaterialTypes, wornTotal: Int, currentCondition: String, shoeHistory: ShoeHistory, isFavorite: Bool, currentPhoto: String? = nil, currentlyWearing: Bool) {
         self.id = id
@@ -64,7 +68,7 @@ struct Shoe: Identifiable {
         return brand != .none && !model.isEmpty && !colorWay.isEmpty && dominantMaterial != .none
     }
     
-    enum Brands: String, CaseIterable {
+    enum Brands: String, CaseIterable, Codable {
         case nike = "Nike"
         case jordan = "Air Jordan"
         case adidas = "Adidas"
@@ -81,7 +85,7 @@ struct Shoe: Identifiable {
         case none = "Select Brand"
     }
     
-    enum MaterialTypes: String, CaseIterable {
+    enum MaterialTypes: String, CaseIterable, Codable {
         case suede = "Suede"
         case nubuck = "Nubuck"
         case leather = "Leather"
@@ -96,14 +100,14 @@ struct Shoe: Identifiable {
     
 }
 
-struct ShoeHistory {
+struct ShoeHistory: Codable {
     var lastActivityWorn: [Activity]
     var dateAdded: Date
     var lastWorn: Date?
     var wornHistory: [Date]?
     var photos: [ShoePhotos]?
     
-    enum Activity: String, CaseIterable {
+    enum Activity: String, CaseIterable, Codable {
         case indoor = "Indoors"
         case outdoor = "Outdoors"
         case work = "Working"
@@ -112,21 +116,13 @@ struct ShoeHistory {
     }
 }
 
-struct ShoePhotos {
+struct ShoePhotos: Codable {
     var photo: String? //not sure if this will be an url
     var dateOfPhoto: Date
 }
 
 extension Shoe {
     static let shoe1 = Shoe(brand: .jordan, model: "Retro 11", colorWay: "Concord", gender: "Mens", size: 10, dominantMaterial: .leather, wornTotal: 10, currentCondition: "A-", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor], dateAdded: Date(), lastWorn: nil), isFavorite: true, currentPhoto: "concord", currentlyWearing: true)
-    
     static let shoe2 = Shoe(brand: .adidas, model: "Yeezy 350", colorWay: "Zebra", gender: "Womens", size: 8, dominantMaterial: .textile, wornTotal: 7, currentCondition: "B+", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor, .outdoor], dateAdded: Date(), lastWorn: Date()), isFavorite: true, currentPhoto: "zebra", currentlyWearing: false)
-    
     static let shoes: [Shoe] = [shoe1, shoe2]
-    
-    static let genders = ["Mens", "Womens", "Kids"]
-    
-    static let conditionGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"]
-    
-    static let sizeRanges = Array(stride(from: 3.5, through: 22, by: 0.5))
 }

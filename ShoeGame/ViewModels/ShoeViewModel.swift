@@ -11,8 +11,9 @@ import Foundation
 class ShoeViewModel: ObservableObject {
     @Published var shoes = Shoe.shoes
     
-    func makeCreateAction() -> NewShoeForm.CreateAction {
+    func makeAddAction() -> NewShoeForm.AddAction {
         return { [weak self] shoe in
+            try await ShoeCollectionRepository.add(shoe)
             self?.shoes.append(shoe)
         }
     }

@@ -17,7 +17,7 @@ struct ShoeCollectionListView: View {
             }
             .navigationTitle("Your Collection")
             .toolbar {
-                NavigationLink(destination: NewShoeForm(createAction: viewModel.makeCreateAction())) {
+                NavigationLink(destination: NewShoeForm(addAction: viewModel.makeAddAction())) {
                     Image(systemName: "plus")
                 }
             }

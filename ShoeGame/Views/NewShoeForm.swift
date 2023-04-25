@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct NewShoeForm: View {
-    typealias CreateAction = (Shoe) -> Void
+    typealias AddAction = (Shoe) async throws -> Void
     
-    let createAction: CreateAction
+    let addAction: AddAction
     @State private var shoe = Shoe()
     @Environment(\.dismiss) var dismiss
         
     private func saveShoe() {
-        createAction(shoe)
+        Task {
+            do {
+                try await addAction(shoe)
+            } catch {
+                print("[NewShoeForm] Cannot add shoe to collection: \(error)")
+            }
+        }
     }
     
     var body: some View {
@@ -99,7 +105,7 @@ struct NewShoeForm: View {
 struct NewShoeForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NewShoeForm(createAction: { _ in })
+            NewShoeForm(addAction: { _ in })
         }
         
     }
