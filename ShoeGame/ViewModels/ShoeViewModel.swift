@@ -9,12 +9,22 @@ import Foundation
 
 @MainActor
 class ShoeViewModel: ObservableObject {
-    @Published var shoes = Shoe.shoes
+    @Published var shoes = [Shoe]()
     
     func makeAddAction() -> NewShoeForm.AddAction {
         return { [weak self] shoe in
             try await ShoeCollectionRepository.add(shoe)
             self?.shoes.append(shoe)
+        }
+    }
+    
+    func fetchShoes() {
+        Task {
+            do {
+                shoes = try await ShoeCollectionRepository.fetchShoes()
+            } catch {
+                print("[ShoesViewModel] Cannot fetch shoes: \(error)")
+            }
         }
     }
 }

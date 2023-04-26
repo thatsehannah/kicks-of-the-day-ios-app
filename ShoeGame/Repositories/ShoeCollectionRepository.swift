@@ -16,6 +16,14 @@ struct ShoeCollectionRepository {
         let document = shoeCollectionRef.document(shoe.id.uuidString)
         try await document.setData(from: shoe)
     }
+    
+    static func fetchShoes() async throws -> [Shoe] {
+        let snapshot = try await shoeCollectionRef.getDocuments()
+        let shoes = snapshot.documents.compactMap { document in
+            try! document.data(as: Shoe.self)
+        }
+        return shoes
+    }
 }
 
 private extension DocumentReference {

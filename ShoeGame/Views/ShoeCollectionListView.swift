@@ -22,7 +22,9 @@ struct ShoeCollectionListView: View {
                 }
             }
         }
-        
+        .onAppear {
+            viewModel.fetchShoes()
+        }
     }
 }
 
