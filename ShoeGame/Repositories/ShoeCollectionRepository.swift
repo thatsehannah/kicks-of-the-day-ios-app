@@ -9,21 +9,52 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct ShoeCollectionRepository {
-    static let shoeCollectionRef = Firestore.firestore().collection("shoe_collection")
+protocol ShoeRepositoryProtocol {
+    func add(_ shoe: Shoe) async throws
+    func fetchShoes() async throws -> [Shoe]
+}
+
+struct ShoeCollectionRepository: ShoeRepositoryProtocol {
+    let shoeCollectionRef = Firestore.firestore().collection("shoe_collection")
     
-    static func add(_ shoe: Shoe) async throws -> Void {
+    func add(_ shoe: Shoe) async throws -> Void {
         let document = shoeCollectionRef.document(shoe.id.uuidString)
         try await document.setData(from: shoe)
     }
     
-    static func fetchShoes() async throws -> [Shoe] {
+    func fetchShoes() async throws -> [Shoe] {
         let snapshot = try await shoeCollectionRef.getDocuments()
         let shoes = snapshot.documents.compactMap { document in
             try! document.data(as: Shoe.self)
         }
         return shoes
     }
+}
+
+struct ShoeRepositoryStub: ShoeRepositoryProtocol {
+    let state: ShoeViewModel.ShoeCollectionState
+    
+    private func simulate() async throws -> [Shoe] {
+        switch self.state {
+        case .loading:
+            try await Task.sleep(nanoseconds: 10 * 1_000_000_000)
+            fatalError("Timeout exceeded for 'loading' case preview")
+        case .error(let error):
+            throw error
+        case .data(let shoes):
+            return shoes
+        case .empty:
+            return [Shoe]()
+        }
+    }
+    
+    func add(_ shoe: Shoe) async throws {}
+    
+    func fetchShoes() async throws -> [Shoe] {
+        return try await simulate()
+    }
+    
+    
 }
 
 private extension DocumentReference {

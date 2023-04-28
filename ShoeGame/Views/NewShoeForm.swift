@@ -20,6 +20,7 @@ struct NewShoeForm: View {
             state = .working
             do {
                 try await addAction(shoe)
+                
             } catch {
                 print("[NewShoeForm] Cannot add shoe to collection: \(error)")
                 state = .error

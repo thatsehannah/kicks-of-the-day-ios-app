@@ -15,6 +15,7 @@
 		BD9A705329F7602D000A265D /* NewShoeForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A705229F7602D000A265D /* NewShoeForm.swift */; };
 		BD9A705629F789BD000A265D /* ShoeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A705529F789BD000A265D /* ShoeViewModel.swift */; };
 		BD9A705929F84E46000A265D /* ShoeCollectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A705829F84E46000A265D /* ShoeCollectionRepository.swift */; };
+		BD9A706429F9A333000A265D /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A706329F9A333000A265D /* EmptyListView.swift */; };
 		BDBC111B29F738A000D65074 /* ShoeGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111A29F738A000D65074 /* ShoeGameApp.swift */; };
 		BDBC111D29F738A000D65074 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111C29F738A000D65074 /* ContentView.swift */; };
 		BDBC111F29F738A000D65074 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBC111E29F738A000D65074 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		BD9A705229F7602D000A265D /* NewShoeForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShoeForm.swift; sourceTree = "<group>"; };
 		BD9A705529F789BD000A265D /* ShoeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeViewModel.swift; sourceTree = "<group>"; };
 		BD9A705829F84E46000A265D /* ShoeCollectionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeCollectionRepository.swift; sourceTree = "<group>"; };
+		BD9A706329F9A333000A265D /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		BDBC111729F738A000D65074 /* ShoeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBC111A29F738A000D65074 /* ShoeGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeGameApp.swift; sourceTree = "<group>"; };
 		BDBC111C29F738A000D65074 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		BD9A703F29F73C20000A265D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BD9A706229F9A30F000A265D /* Subviews */,
 				BDBC111C29F738A000D65074 /* ContentView.swift */,
 				BD9A704E29F74D9C000A265D /* ShoeCollectionListView.swift */,
 				BD9A705029F74DF6000A265D /* ShoeCollectionListItem.swift */,
@@ -101,6 +104,21 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		BD9A706129F99ED2000A265D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		BD9A706229F9A30F000A265D /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				BD9A706329F9A333000A265D /* EmptyListView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		BDBC110E29F7389F00D65074 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +138,7 @@
 		BDBC111929F738A000D65074 /* ShoeGame */ = {
 			isa = PBXGroup;
 			children = (
+				BD9A706129F99ED2000A265D /* Utilities */,
 				BD9A705729F84E0D000A265D /* Repositories */,
 				BD9A705429F7898A000A265D /* ViewModels */,
 				BD9A704B29F7494A000A265D /* Models */,
@@ -228,6 +247,7 @@
 				BD9A705629F789BD000A265D /* ShoeViewModel.swift in Sources */,
 				BDBC111B29F738A000D65074 /* ShoeGameApp.swift in Sources */,
 				BD9A705329F7602D000A265D /* NewShoeForm.swift in Sources */,
+				BD9A706429F9A333000A265D /* EmptyListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
