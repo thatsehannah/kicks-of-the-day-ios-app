@@ -12,11 +12,7 @@ struct ShoeCollectionListItem: View {
     
     var body: some View {
         HStack {
-            if let photo = shoe.currentPhoto {
-                ShoeImageView(imageName: photo)
-            } else {
-                ShoeImageView(imageName: "blank")
-            }
+            ShoeImageView(imageName: shoe.currentPhoto ?? "blank")
             Spacer()
             VStack(alignment: .leading) {
                 Text(shoe.shoeName)
@@ -54,11 +50,12 @@ struct ShoeCollectionListItem_Previews: PreviewProvider {
         List {
             ShoeCollectionListItem(shoe: Shoe.shoe1)
         }
+        .previewDisplayName("With Image")
 
-        //shoe with no image
         List {
             ShoeCollectionListItem(shoe: Shoe(brand: .adidas, model: "Yeezy 700", colorWay: "WaveRunner", gender: Shoe.genders[0], size: Shoe.sizeRanges[12], dominantMaterial: .nubuck, wornTotal: 0, currentCondition: Shoe.conditionGrades[3], shoeHistory: ShoeHistory(lastActivityWorn: [.none], dateAdded: Date()), isFavorite: false, currentlyWearing: false))
         }
+        .previewDisplayName("No Image")
         
     }
 }

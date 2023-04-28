@@ -16,6 +16,7 @@
 		BD9A705629F789BD000A265D /* ShoeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A705529F789BD000A265D /* ShoeViewModel.swift */; };
 		BD9A705929F84E46000A265D /* ShoeCollectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A705829F84E46000A265D /* ShoeCollectionRepository.swift */; };
 		BD9A706429F9A333000A265D /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A706329F9A333000A265D /* EmptyListView.swift */; };
+		BD9A706629FBB612000A265D /* ShoeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A706529FBB612000A265D /* ShoeDetailView.swift */; };
 		BDBC111B29F738A000D65074 /* ShoeGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111A29F738A000D65074 /* ShoeGameApp.swift */; };
 		BDBC111D29F738A000D65074 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBC111C29F738A000D65074 /* ContentView.swift */; };
 		BDBC111F29F738A000D65074 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBC111E29F738A000D65074 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		BD9A705529F789BD000A265D /* ShoeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeViewModel.swift; sourceTree = "<group>"; };
 		BD9A705829F84E46000A265D /* ShoeCollectionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeCollectionRepository.swift; sourceTree = "<group>"; };
 		BD9A706329F9A333000A265D /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		BD9A706529FBB612000A265D /* ShoeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeDetailView.swift; sourceTree = "<group>"; };
 		BDBC111729F738A000D65074 /* ShoeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBC111A29F738A000D65074 /* ShoeGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeGameApp.swift; sourceTree = "<group>"; };
 		BDBC111C29F738A000D65074 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				BD9A704E29F74D9C000A265D /* ShoeCollectionListView.swift */,
 				BD9A705029F74DF6000A265D /* ShoeCollectionListItem.swift */,
 				BD9A705229F7602D000A265D /* NewShoeForm.swift */,
+				BD9A706529FBB612000A265D /* ShoeDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				BD9A704F29F74D9C000A265D /* ShoeCollectionListView.swift in Sources */,
 				BDBC111D29F738A000D65074 /* ContentView.swift in Sources */,
 				BD9A705629F789BD000A265D /* ShoeViewModel.swift in Sources */,
+				BD9A706629FBB612000A265D /* ShoeDetailView.swift in Sources */,
 				BDBC111B29F738A000D65074 /* ShoeGameApp.swift in Sources */,
 				BD9A705329F7602D000A265D /* NewShoeForm.swift in Sources */,
 				BD9A706429F9A333000A265D /* EmptyListView.swift in Sources */,

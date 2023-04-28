@@ -12,15 +12,11 @@ import FirebaseFirestoreSwift
 protocol ShoeRepositoryProtocol {
     func add(_ shoe: Shoe) async throws
     func fetchShoes() async throws -> [Shoe]
+    func delete(_ shoe: Shoe) async throws
 }
 
 struct ShoeCollectionRepository: ShoeRepositoryProtocol {
     let shoeCollectionRef = Firestore.firestore().collection("shoe_collection")
-    
-    func add(_ shoe: Shoe) async throws -> Void {
-        let document = shoeCollectionRef.document(shoe.id.uuidString)
-        try await document.setData(from: shoe)
-    }
     
     func fetchShoes() async throws -> [Shoe] {
         let snapshot = try await shoeCollectionRef.getDocuments()
@@ -28,6 +24,16 @@ struct ShoeCollectionRepository: ShoeRepositoryProtocol {
             try! document.data(as: Shoe.self)
         }
         return shoes
+    }
+    
+    func add(_ shoe: Shoe) async throws -> Void {
+        let document = shoeCollectionRef.document(shoe.id.uuidString)
+        try await document.setData(from: shoe)
+    }
+    
+    func delete(_ shoe: Shoe) async throws {
+        let document = shoeCollectionRef.document(shoe.id.uuidString)
+        try await document.delete()
     }
 }
 
@@ -48,12 +54,13 @@ struct ShoeRepositoryStub: ShoeRepositoryProtocol {
         }
     }
     
-    func add(_ shoe: Shoe) async throws {}
-    
     func fetchShoes() async throws -> [Shoe] {
         return try await simulate()
     }
     
+    func add(_ shoe: Shoe) async throws {}
+    
+    func delete(_ shoe: Shoe) async throws {}
     
 }
 
