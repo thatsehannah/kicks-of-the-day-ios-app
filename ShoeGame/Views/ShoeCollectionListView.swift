@@ -34,7 +34,7 @@ struct ShoeCollectionListView: View {
                     EmptyListView(
                         title: "No Shoes",
                         message: "You don't have any shoes in your collection.\n Press the plus sign above to add.") {
-                            NavigationLink(destination: NewShoeForm(addAction: viewModel.makeAddAction())) {
+                            NavigationLink(destination: ShoeForm(addAction: viewModel.makeAddAction(), formTitle: "Add to Collection")) {
                                 Text("Add to collection")
                                     .padding(10)
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
@@ -48,7 +48,7 @@ struct ShoeCollectionListView: View {
             }
             .navigationTitle("Your Collection")
             .toolbar {
-                NavigationLink(destination: NewShoeForm(addAction: viewModel.makeAddAction())) {
+                NavigationLink(destination: ShoeForm(addAction: viewModel.makeAddAction(), formTitle: "Add to Collection")) {
                     Image(systemName: "plus")
                 }
             }

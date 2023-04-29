@@ -122,7 +122,7 @@ struct ShoePhotos: Codable {
 }
 
 extension Shoe {
-    static let shoe1 = Shoe(brand: .jordan, model: "Retro 11", colorWay: "Concord", gender: "Mens", size: 10, dominantMaterial: .leather, wornTotal: 10, currentCondition: "A-", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor], dateAdded: Date(), lastWorn: nil), isFavorite: true, currentPhoto: "concord", currentlyWearing: true)
-    static let shoe2 = Shoe(brand: .adidas, model: "Yeezy 350", colorWay: "Zebra", gender: "Womens", size: 8, dominantMaterial: .textile, wornTotal: 7, currentCondition: "B+", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor, .outdoor], dateAdded: Date(), lastWorn: Date()), isFavorite: true, currentPhoto: "zebra", currentlyWearing: false)
+    static let shoe1 = Shoe(brand: .jordan, model: "Retro 11", colorWay: "Concord", gender: "Mens", size: 10, dominantMaterial: .leather, wornTotal: 7, currentCondition: "A-", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor], dateAdded: Date(), lastWorn: nil), isFavorite: true, currentPhoto: "concord", currentlyWearing: true)
+    static let shoe2 = Shoe(brand: .adidas, model: "Yeezy 350", colorWay: "Zebra", gender: "Womens", size: 8, dominantMaterial: .textile, wornTotal: 16, currentCondition: "B+", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor, .outdoor], dateAdded: Date(), lastWorn: Date()), isFavorite: true, currentPhoto: "zebra", currentlyWearing: false)
     static let shoes: [Shoe] = [shoe1, shoe2]
 }

@@ -26,7 +26,7 @@ class ShoeViewModel: ObservableObject {
         case error(Error)
     }
     
-    func makeAddAction() -> NewShoeForm.AddAction {
+    func makeAddAction() -> ShoeForm.AddAction {
         return { [weak self] shoe in
             try await self?.shoeCollectionRepo.add(shoe)
             self?.addShoeToList(shoe)

@@ -7,13 +7,20 @@
 
 import SwiftUI
 
-struct NewShoeForm: View {
+struct ShoeForm: View {
     typealias AddAction = (Shoe) async throws -> Void
     
     let addAction: AddAction
-    @State private var shoe = Shoe()
+    let formTitle: String
+    @State private var shoe: Shoe
     @State private var state = FormState.idle
     @Environment(\.dismiss) var dismiss
+    
+    init(addAction: @escaping AddAction, shoe: Shoe = Shoe(), formTitle: String ) {
+        self.addAction = addAction
+        _shoe = State(initialValue: shoe)
+        self.formTitle = formTitle
+    }
         
     private func saveShoe() {
         Task {
@@ -46,10 +53,10 @@ struct NewShoeForm: View {
                 }
             }
             Section("Model") {
-                TextField("Retro 11", text: $shoe.model)
+                TextField("e.g. Retro 11", text: $shoe.model)
             }
             Section("Colorway") {
-                TextField("Concord", text: $shoe.colorWay)
+                TextField("e.g. Concord", text: $shoe.colorWay)
                 TextField("Style number (Optional)", text: Binding(
                     get: {self.shoe.styleNumber ?? ""},
                     set: {self.shoe.styleNumber = $0.isEmpty ? nil : $0}
@@ -86,7 +93,7 @@ struct NewShoeForm: View {
         }
         .disabled(state == .working)
         .overlay(workingOverlay)
-        .navigationTitle("Add To Collection")
+        .navigationBarTitle(formTitle, displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -120,7 +127,7 @@ struct NewShoeForm: View {
     }
 }
 
-extension NewShoeForm {
+extension ShoeForm {
     enum FormState {
         case idle, working, error
 
@@ -138,10 +145,15 @@ extension NewShoeForm {
     }
 }
 
-struct NewShoeForm_Previews: PreviewProvider {
+struct ShoeForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NewShoeForm(addAction: { _ in })
+            ShoeForm(addAction: { _ in }, formTitle: "Add to Collection")
         }
+        .previewDisplayName("Adding Shoe")
+        NavigationView {
+            ShoeForm(addAction: { _ in }, shoe: Shoe.shoe1, formTitle: "Edit Shoe")
+        }
+        .previewDisplayName("Editing Shoe")
     }
 }

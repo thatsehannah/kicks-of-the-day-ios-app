@@ -14,21 +14,24 @@ struct ShoeCollectionListItem: View {
         HStack {
             ShoeImageView(imageName: shoe.currentPhoto ?? "blank")
             Spacer()
-            VStack(alignment: .leading) {
-                Text(shoe.shoeName)
-                    .font(.body)
-                    .fontWeight(.bold)
-                Spacer()
-                HStack {
-                    Image(systemName: "clock.arrow.circlepath")
-                        .foregroundColor(.gray)
-                    Text(shoe.shoeHistory.lastWorn?.formatted(date: .abbreviated, time: .omitted) ?? "Never")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                        .fontWeight(.semibold)
+            NavigationLink(destination: ShoeDetailView(shoe: shoe)) {
+                VStack(alignment: .leading) {
+                    Text(shoe.shoeName)
+                        .font(.body)
+                        .fontWeight(.bold)
+                    Spacer()
+                    HStack {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .foregroundColor(.gray)
+                        Text(shoe.shoeHistory.lastWorn?.formatted(date: .abbreviated, time: .omitted) ?? "Never")
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                            .fontWeight(.semibold)
+                    }
                 }
+                .frame(width: 150, alignment: .leading)
             }
-            .frame(width: 150, alignment: .leading)
+            
         }
         .padding(.vertical)
     }
