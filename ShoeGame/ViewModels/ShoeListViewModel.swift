@@ -1,5 +1,5 @@
 //
-//  ShoeViewModel.swift
+//  ShoeListViewModel.swift
 //  ShoeGame
 //
 //  Created by Elliot Hannah III on 4/24/23.
@@ -10,7 +10,7 @@ import Foundation
 
 
 @MainActor
-class ShoeViewModel: ObservableObject {
+class ShoeListViewModel: ObservableObject {
     @Published var shoes = [Shoe]()
     @Published private(set) var state: ShoeCollectionState = .loading
     private let shoeCollectionRepo: ShoeRepositoryProtocol
@@ -26,13 +26,6 @@ class ShoeViewModel: ObservableObject {
         case error(Error)
     }
     
-    func makeAddAction() -> ShoeForm.AddAction {
-        return { [weak self] shoe in
-            try await self?.shoeCollectionRepo.add(shoe)
-            self?.addShoeToList(shoe)
-        }
-    }
-    
     private func addShoeToList(_ shoe: Shoe) {
         switch state {
         case .empty, .loading:
@@ -42,6 +35,13 @@ class ShoeViewModel: ObservableObject {
             state = .data(shoes)
         case .error(_):
             break
+        }
+    }
+    
+    func makeSaveAction() -> ShoeForm.FormAction {
+        return { [weak self] shoe in
+            try await self?.shoeCollectionRepo.add(shoe)
+            self?.addShoeToList(shoe)
         }
     }
     

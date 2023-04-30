@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShoeCollectionListView: View {
-    @StateObject var viewModel = ShoeViewModel()
+    @StateObject var viewModel = ShoeListViewModel()
     
     var body: some View {
         NavigationView {
@@ -34,7 +34,7 @@ struct ShoeCollectionListView: View {
                     EmptyListView(
                         title: "No Shoes",
                         message: "You don't have any shoes in your collection.\n Press the plus sign above to add.") {
-                            NavigationLink(destination: ShoeForm(addAction: viewModel.makeAddAction(), formTitle: "Add to Collection")) {
+                            NavigationLink(destination: ShoeForm(saveAction: viewModel.makeSaveAction(), shoe: Shoe(), formTitle: "Add to Collection")) {
                                 Text("Add to collection")
                                     .padding(10)
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
@@ -48,7 +48,7 @@ struct ShoeCollectionListView: View {
             }
             .navigationTitle("Your Collection")
             .toolbar {
-                NavigationLink(destination: ShoeForm(addAction: viewModel.makeAddAction(), formTitle: "Add to Collection")) {
+                NavigationLink(destination: ShoeForm(saveAction: viewModel.makeSaveAction(), shoe: Shoe(), formTitle: "Add to Collection")) {
                     Image(systemName: "plus")
                 }
             }
@@ -62,11 +62,11 @@ struct ShoeCollectionListView: View {
 struct ShoeCollectionListView_Previews: PreviewProvider {
     @MainActor
     private struct ListPreview: View {
-        let state: ShoeViewModel.ShoeCollectionState
+        let state: ShoeListViewModel.ShoeCollectionState
         
         var body: some View {
             let shoeRepo = ShoeRepositoryStub(state: state)
-            let viewModel = ShoeViewModel(shoeCollectionRepo: shoeRepo)
+            let viewModel = ShoeListViewModel(shoeCollectionRepo: shoeRepo)
             ShoeCollectionListView(viewModel: viewModel)
         }
     }

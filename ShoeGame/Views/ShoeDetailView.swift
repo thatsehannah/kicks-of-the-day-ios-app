@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ShoeDetailView: View {
     let shoe: Shoe
-    @ObservedObject var viewModel = ShoeViewModel()
+    @ObservedObject var viewModel = ShoeListViewModel()
     @State private var openForm = false
     
     var body: some View {
@@ -19,7 +19,7 @@ struct ShoeDetailView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                NavigationLink(destination: ShoeForm(addAction: viewModel.makeAddAction(), shoe: shoe, formTitle: "Edit Shoe"), isActive: $openForm) {
+                NavigationLink(destination: ShoeForm(saveAction: viewModel.makeSaveAction(), shoe: shoe, formTitle: "Edit Shoe"), isActive: $openForm) {
                     Button(action: {openForm = true}) {
                         Text("Edit")
                     }

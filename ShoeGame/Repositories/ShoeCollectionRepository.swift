@@ -38,7 +38,7 @@ struct ShoeCollectionRepository: ShoeRepositoryProtocol {
 }
 
 struct ShoeRepositoryStub: ShoeRepositoryProtocol {
-    let state: ShoeViewModel.ShoeCollectionState
+    let state: ShoeListViewModel.ShoeCollectionState
     
     private func simulate() async throws -> [Shoe] {
         switch self.state {

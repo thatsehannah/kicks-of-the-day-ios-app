@@ -8,25 +8,30 @@
 import SwiftUI
 
 struct ShoeForm: View {
-    typealias AddAction = (Shoe) async throws -> Void
+    typealias FormAction = (Shoe) async throws -> Void
     
-    let addAction: AddAction
+    let saveAction: FormAction
     let formTitle: String
     @State private var shoe: Shoe
     @State private var state = FormState.idle
     @Environment(\.dismiss) var dismiss
     
-    init(addAction: @escaping AddAction, shoe: Shoe = Shoe(), formTitle: String ) {
-        self.addAction = addAction
+    init(saveAction: @escaping FormAction, shoe: Shoe, formTitle: String ) {
+        self.saveAction = saveAction
         _shoe = State(initialValue: shoe)
         self.formTitle = formTitle
+    }
+    
+    enum EditShoeMode {
+        case add
+        case edit
     }
         
     private func saveShoe() {
         Task {
             state = .working
             do {
-                try await addAction(shoe)
+                try await saveAction(shoe)
                 
             } catch {
                 print("[NewShoeForm] Cannot add shoe to collection: \(error)")
@@ -148,11 +153,11 @@ extension ShoeForm {
 struct ShoeForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ShoeForm(addAction: { _ in }, formTitle: "Add to Collection")
+            ShoeForm(saveAction: { _ in }, shoe: Shoe(), formTitle: "Add to Collection")
         }
         .previewDisplayName("Adding Shoe")
         NavigationView {
-            ShoeForm(addAction: { _ in }, shoe: Shoe.shoe1, formTitle: "Edit Shoe")
+            ShoeForm(saveAction: { _ in }, shoe: Shoe.shoe1, formTitle: "Edit Shoe")
         }
         .previewDisplayName("Editing Shoe")
     }
