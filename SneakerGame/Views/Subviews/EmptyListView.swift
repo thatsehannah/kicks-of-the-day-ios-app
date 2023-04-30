@@ -1,6 +1,6 @@
 //
 //  EmptyListView.swift
-//  ShoeGame
+//  SneakerGame
 //
 //  Created by Elliot Hannah III on 4/26/23.
 //
@@ -31,9 +31,9 @@ struct EmptyListView<Content: View>: View {
 
 struct EmptyListView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyListView(title: "⛔️ 🛜", message: "Something went wrong while loading shoes. Please check your internet connection.", content: { Text("Retry")})
+        EmptyListView(title: "⛔️ 🛜", message: "Something went wrong while loading sneakers. Please check your internet connection.", content: { Text("Retry")})
             .previewDisplayName("Error")
-        EmptyListView(title: "🚫 👟", message: "You don't have any shoes in your collection.", content: { Text("Add to Collection")})
+        EmptyListView(title: "🚫 👟", message: "You don't have any sneakers in your collection.", content: { Text("Add to Collection")})
             .previewDisplayName("Empty")
     }
 }

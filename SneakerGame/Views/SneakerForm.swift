@@ -1,40 +1,40 @@
 //
-//  NewShoeForm.swift
-//  ShoeGame
+//  NewSneakerForm.swift
+//  SneakerGame
 //
 //  Created by Elliot Hannah III on 4/24/23.
 //
 
 import SwiftUI
 
-struct ShoeForm: View {
-    typealias FormAction = (Shoe) async throws -> Void
+struct SneakerForm: View {
+    typealias FormAction = (Sneaker) async throws -> Void
     
     let saveAction: FormAction
     let formTitle: String
-    @State private var shoe: Shoe
+    @State private var sneaker: Sneaker
     @State private var state = FormState.idle
     @Environment(\.dismiss) var dismiss
     
-    init(saveAction: @escaping FormAction, shoe: Shoe, formTitle: String ) {
+    init(saveAction: @escaping FormAction, sneaker: Sneaker, formTitle: String ) {
         self.saveAction = saveAction
-        _shoe = State(initialValue: shoe)
+        _sneaker = State(initialValue: sneaker)
         self.formTitle = formTitle
     }
     
-    enum EditShoeMode {
+    enum EditSneakerMode {
         case add
         case edit
     }
         
-    private func saveShoe() {
+    private func saveSneaker() {
         Task {
             state = .working
             do {
-                try await saveAction(shoe)
+                try await saveAction(sneaker)
                 
             } catch {
-                print("[NewShoeForm] Cannot add shoe to collection: \(error)")
+                print("[SneakerForm] Cannot add sneaker to collection: \(error)")
                 state = .error
             }
         }
@@ -51,37 +51,37 @@ struct ShoeForm: View {
                 }
             }
             Section {
-                Picker("Brand", selection: $shoe.brand) {
-                    ForEach(Shoe.Brands.allCases, id: \.self) { brand in
+                Picker("Brand", selection: $sneaker.brand) {
+                    ForEach(Sneaker.Brands.allCases, id: \.self) { brand in
                         Text(brand.rawValue)
                     }
                 }
             }
             Section("Model") {
-                TextField("e.g. Retro 11", text: $shoe.model)
+                TextField("e.g. Retro 11", text: $sneaker.model)
             }
             Section("Colorway") {
-                TextField("e.g. Concord", text: $shoe.colorWay)
+                TextField("e.g. Concord", text: $sneaker.colorWay)
                 TextField("Style number (Optional)", text: Binding(
-                    get: {self.shoe.styleNumber ?? ""},
-                    set: {self.shoe.styleNumber = $0.isEmpty ? nil : $0}
+                    get: {self.sneaker.styleNumber ?? ""},
+                    set: {self.sneaker.styleNumber = $0.isEmpty ? nil : $0}
                 ))
-                Picker("Material", selection: $shoe.dominantMaterial) {
-                    ForEach(Shoe.MaterialTypes.allCases, id: \.self) { material in
+                Picker("Material", selection: $sneaker.dominantMaterial) {
+                    ForEach(Sneaker.MaterialTypes.allCases, id: \.self) { material in
                         Text("\(material.rawValue)")
                     }
                 }
             }
             Section {
                 HStack(spacing: 10) {
-                    Picker("Size", selection: $shoe.gender) {
-                        ForEach(Shoe.genders, id: \.self) { gender in
+                    Picker("Size", selection: $sneaker.gender) {
+                        ForEach(Sneaker.genders, id: \.self) { gender in
                             Text("\(gender)")
                         }
                         
                     }
-                    Picker("", selection: $shoe.size) {
-                        ForEach(Shoe.sizeRanges, id: \.self) { sz in
+                    Picker("", selection: $sneaker.size) {
+                        ForEach(Sneaker.sizeRanges, id: \.self) { sz in
                             Text(String(format: "%.1f", sz))
                         }
                     }
@@ -89,8 +89,8 @@ struct ShoeForm: View {
                 }
             }
             Section {
-                Picker("Condition", selection: $shoe.currentCondition) {
-                    ForEach(Shoe.conditionGrades, id: \.self) { grade in
+                Picker("Condition", selection: $sneaker.currentCondition) {
+                    ForEach(Sneaker.conditionGrades, id: \.self) { grade in
                         Text("\(grade)")
                     }
                 }
@@ -109,15 +109,15 @@ struct ShoeForm: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save", action: {
-                    saveShoe()
+                    saveSneaker()
                     dismiss()
                 })
                 .padding(.leading)
                 .font(.body)
-                .disabled(shoe.brand == .none || shoe.model.isEmpty || shoe.colorWay.isEmpty || shoe.dominantMaterial == .none)
+                .disabled(sneaker.brand == .none || sneaker.model.isEmpty || sneaker.colorWay.isEmpty || sneaker.dominantMaterial == .none)
             }
         }
-        .alert("Cannot create shoe", isPresented: $state.isError) {
+        .alert("Cannot create sneaker", isPresented: $state.isError) {
             Text("Sorry, something wen't wrong")
         }
     }
@@ -132,7 +132,7 @@ struct ShoeForm: View {
     }
 }
 
-extension ShoeForm {
+extension SneakerForm {
     enum FormState {
         case idle, working, error
 
@@ -150,15 +150,15 @@ extension ShoeForm {
     }
 }
 
-struct ShoeForm_Previews: PreviewProvider {
+struct SneakerForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ShoeForm(saveAction: { _ in }, shoe: Shoe(), formTitle: "Add to Collection")
+            SneakerForm(saveAction: { _ in }, sneaker: Sneaker(), formTitle: "Add to Collection")
         }
-        .previewDisplayName("Adding Shoe")
+        .previewDisplayName("Adding Sneaker")
         NavigationView {
-            ShoeForm(saveAction: { _ in }, shoe: Shoe.shoe1, formTitle: "Edit Shoe")
+            SneakerForm(saveAction: { _ in }, sneaker: Sneaker.sneaker1, formTitle: "Edit Sneaker")
         }
-        .previewDisplayName("Editing Shoe")
+        .previewDisplayName("Editing Sneaker")
     }
 }

@@ -1,25 +1,25 @@
 //
-//  Shoe.swift
-//  ShoeGame
+//  Sneaker.swift
+//  
 //
 //  Created by Elliot Hannah III on 4/24/23.
 //
 
 import Foundation
 
-struct Shoe: Identifiable, Codable {
+struct Sneaker: Identifiable, Codable {
     var id = UUID()
     var brand: Brands
     var model: String
     var colorWay: String
-    var styleNumber: String? //will be useful for prepopulating shoes down the road
+    var styleNumber: String? //will be useful for prepopulating sneakers down the road
     var gender: String
     var size: Double
     var pricePaid: Double?
     var dominantMaterial: MaterialTypes
     var wornTotal: Int
     var currentCondition: String
-    var shoeHistory: ShoeHistory
+    var sneakerHistory: SneakerHistory
     var isFavorite: Bool
     var currentPhoto: String? //not sure if this will be an url
     var currentlyWearing: Bool
@@ -28,7 +28,7 @@ struct Shoe: Identifiable, Codable {
     static let conditionGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"]
     static let sizeRanges = Array(stride(from: 3.5, through: 22, by: 0.5))
     
-    init(id: UUID = UUID(), brand: Brands, model: String, colorWay: String, styleNumber: String? = nil, gender: String, size: Double, pricePaid: Double? = nil, dominantMaterial: MaterialTypes, wornTotal: Int, currentCondition: String, shoeHistory: ShoeHistory, isFavorite: Bool, currentPhoto: String? = nil, currentlyWearing: Bool) {
+    init(id: UUID = UUID(), brand: Brands, model: String, colorWay: String, styleNumber: String? = nil, gender: String, size: Double, pricePaid: Double? = nil, dominantMaterial: MaterialTypes, wornTotal: Int, currentCondition: String, sneakerHistory: SneakerHistory, isFavorite: Bool, currentPhoto: String? = nil, currentlyWearing: Bool) {
         self.id = id
         self.brand = brand
         self.model = model
@@ -40,7 +40,7 @@ struct Shoe: Identifiable, Codable {
         self.dominantMaterial = dominantMaterial
         self.wornTotal = wornTotal
         self.currentCondition = currentCondition
-        self.shoeHistory = shoeHistory
+        self.sneakerHistory = sneakerHistory
         self.isFavorite = isFavorite
         self.currentPhoto = currentPhoto
         self.currentlyWearing = currentlyWearing
@@ -50,22 +50,18 @@ struct Shoe: Identifiable, Codable {
         self.brand = .none
         self.model = ""
         self.colorWay = ""
-        self.gender = Shoe.genders[0]
-        self.size = Shoe.sizeRanges[0]
+        self.gender = Sneaker.genders[0]
+        self.size = Sneaker.sizeRanges[0]
         self.dominantMaterial = .none
         self.isFavorite = false
         self.wornTotal = 0
-        self.currentCondition = Shoe.conditionGrades[0]
-        self.shoeHistory = ShoeHistory(lastActivityWorn: [.none], dateAdded: Date())
+        self.currentCondition = Sneaker.conditionGrades[0]
+        self.sneakerHistory = SneakerHistory(lastActivityWorn: [.none], dateAdded: Date())
         self.currentlyWearing = false
     }
     
-    var shoeName: String {
+    var sneakerName: String {
         return "\(brand.rawValue) \(model) '\(colorWay)'"
-    }
-    
-    var isNewShoeValid: Bool {
-        return brand != .none && !model.isEmpty && !colorWay.isEmpty && dominantMaterial != .none
     }
     
     enum Brands: String, CaseIterable, Codable {
@@ -100,12 +96,12 @@ struct Shoe: Identifiable, Codable {
     
 }
 
-struct ShoeHistory: Codable {
+struct SneakerHistory: Codable {
     var lastActivityWorn: [Activity]
     var dateAdded: Date
     var lastWorn: Date?
     var wornHistory: [Date]?
-    var photos: [ShoePhotos]?
+    var photos: [SneakerPhoto]?
     
     enum Activity: String, CaseIterable, Codable {
         case indoor = "Indoors"
@@ -116,13 +112,13 @@ struct ShoeHistory: Codable {
     }
 }
 
-struct ShoePhotos: Codable {
+struct SneakerPhoto: Codable {
     var photo: String? //not sure if this will be an url
     var dateOfPhoto: Date
 }
 
-extension Shoe {
-    static let shoe1 = Shoe(brand: .jordan, model: "Retro 11", colorWay: "Concord", gender: "Mens", size: 10, dominantMaterial: .leather, wornTotal: 7, currentCondition: "A-", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor], dateAdded: Date(), lastWorn: nil), isFavorite: true, currentPhoto: "concord", currentlyWearing: true)
-    static let shoe2 = Shoe(brand: .adidas, model: "Yeezy 350", colorWay: "Zebra", gender: "Womens", size: 8, dominantMaterial: .textile, wornTotal: 16, currentCondition: "B+", shoeHistory: ShoeHistory(lastActivityWorn: [.indoor, .outdoor], dateAdded: Date(), lastWorn: Date()), isFavorite: true, currentPhoto: "zebra", currentlyWearing: false)
-    static let shoes: [Shoe] = [shoe1, shoe2]
+extension Sneaker {
+    static let sneaker1 = Sneaker(brand: .jordan, model: "Retro 11", colorWay: "Concord", gender: "Mens", size: 10, dominantMaterial: .leather, wornTotal: 7, currentCondition: "A-", sneakerHistory: SneakerHistory(lastActivityWorn: [.indoor], dateAdded: Date(), lastWorn: nil), isFavorite: true, currentPhoto: "concord", currentlyWearing: true)
+    static let sneaker2 = Sneaker(brand: .adidas, model: "Yeezy 350", colorWay: "Zebra", gender: "Womens", size: 8, dominantMaterial: .textile, wornTotal: 16, currentCondition: "B+", sneakerHistory: SneakerHistory(lastActivityWorn: [.indoor, .outdoor], dateAdded: Date(), lastWorn: Date()), isFavorite: true, currentPhoto: "zebra", currentlyWearing: false)
+    static let sneakers: [Sneaker] = [sneaker1, sneaker2]
 }

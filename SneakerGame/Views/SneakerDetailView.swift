@@ -1,25 +1,25 @@
 //
-//  ShoeDetailView.swift
-//  ShoeGame
+//  SneakerDetailView.swift
+//  SneakerGame
 //
 //  Created by Elliot Hannah III on 4/28/23.
 //
 
 import SwiftUI
 
-struct ShoeDetailView: View {
-    let shoe: Shoe
-    @ObservedObject var viewModel = ShoeListViewModel()
+struct SneakerDetailView: View {
+    let sneaker: Sneaker
+    @ObservedObject var viewModel = SneakerListViewModel()
     @State private var openForm = false
     
     var body: some View {
         VStack(alignment: .leading) {
             ZStack(alignment: .bottomTrailing) {
-                Image(shoe.currentPhoto ?? "blank")
+                Image(sneaker.currentPhoto ?? "blank")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                NavigationLink(destination: ShoeForm(saveAction: viewModel.makeSaveAction(), shoe: shoe, formTitle: "Edit Shoe"), isActive: $openForm) {
+                NavigationLink(destination: SneakerForm(saveAction: viewModel.makeSaveAction(), sneaker: sneaker, formTitle: "Edit Sneaker"), isActive: $openForm) {
                     Button(action: {openForm = true}) {
                         Text("Edit")
                     }
@@ -33,38 +33,38 @@ struct ShoeDetailView: View {
             Divider()
             VStack(alignment: .leading, spacing: 10) {
                 Group {
-                    Text("\(shoe.brand.rawValue) \(shoe.model)")
+                    Text("\(sneaker.brand.rawValue) \(sneaker.model)")
                         .font(.largeTitle)
-                    Text("'\(shoe.colorWay)'")
+                    Text("'\(sneaker.colorWay)'")
                         .font(.largeTitle.bold())
                     Divider()
                         .padding(.vertical)
                     HStack {
                         Text("Size:")
-                        Text("\(shoe.gender) \(String(format: "%.1f", shoe.size))")
+                        Text("\(sneaker.gender) \(String(format: "%.1f", sneaker.size))")
                             .fontWeight(.bold)
                     }
                     HStack {
-                        let totals = shoe.wornTotal > 10 ? "10+" : String(shoe.wornTotal)
+                        let totals = sneaker.wornTotal > 10 ? "10+" : String(sneaker.wornTotal)
                         Text("Worn Total:")
                         Text("\(totals)")
                             .fontWeight(.bold)
                     }
                     HStack(alignment: .top) {
                         Text("Last Worn:")
-                        Text(shoe.shoeHistory.lastWorn?.formatted(date: .abbreviated, time: .omitted) ?? "Never")
+                        Text(sneaker.sneakerHistory.lastWorn?.formatted(date: .abbreviated, time: .omitted) ?? "Never")
                             .fontWeight(.bold)
                     }
                     
                     HStack {
                         HStack {
                             Text("Condition:")
-                            Text("\(shoe.currentCondition)")
+                            Text("\(sneaker.currentCondition)")
                                 .fontWeight(.bold)
                         }
                         Spacer()
                         Text("Material:")
-                        Text("\(shoe.dominantMaterial.rawValue)")
+                        Text("\(sneaker.dominantMaterial.rawValue)")
                             .fontWeight(.bold)
                     }
                 }
@@ -72,7 +72,7 @@ struct ShoeDetailView: View {
             }
         }
         
-        .navigationBarTitle("Shoe Detail", displayMode: .inline)
+        .navigationBarTitle("Sneaker Detail", displayMode: .inline)
         .safeAreaInset(edge: .bottom) {
             Group {
                 NavigationLink(destination: EmptyView()) {
@@ -108,10 +108,10 @@ struct ShoeDetailView: View {
     }
 }
 
-struct ShoeDetailView_Previews: PreviewProvider {
+struct SneakerDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ShoeDetailView(shoe: Shoe.shoe2)
+            SneakerDetailView(sneaker: Sneaker.sneaker2)
         }
         
     }

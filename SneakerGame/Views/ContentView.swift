@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  ShoeGame
+//  SneakerGame
 //
 //  Created by Elliot Hannah III on 4/24/23.
 //

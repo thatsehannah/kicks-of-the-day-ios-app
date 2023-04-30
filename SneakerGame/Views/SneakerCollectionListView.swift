@@ -1,14 +1,14 @@
 //
-//  ShoeCollectionListView.swift
-//  ShoeGame
+//  SneakerCollectionListView.swift
+//  SneakerGame
 //
 //  Created by Elliot Hannah III on 4/24/23.
 //
 
 import SwiftUI
 
-struct ShoeCollectionListView: View {
-    @StateObject var viewModel = ShoeListViewModel()
+struct SneakerCollectionListView: View {
+    @StateObject var viewModel = SneakerListViewModel()
     
     var body: some View {
         NavigationView {
@@ -18,11 +18,11 @@ struct ShoeCollectionListView: View {
                     ProgressView()
                 case .error(let error):
                     EmptyListView(
-                        title: "Cannot Load Shoes",
+                        title: "Cannot Load Sneakers",
                         message: error.localizedDescription) {
                             Button(action: {
                                 Task {
-                                    viewModel.fetchShoes()
+                                    viewModel.fetchSneakers()
                                 }
                             }) {
                                 Text("Try Again")
@@ -32,42 +32,42 @@ struct ShoeCollectionListView: View {
                         }
                 case .empty:
                     EmptyListView(
-                        title: "No Shoes",
-                        message: "You don't have any shoes in your collection.\n Press the plus sign above to add.") {
-                            NavigationLink(destination: ShoeForm(saveAction: viewModel.makeSaveAction(), shoe: Shoe(), formTitle: "Add to Collection")) {
+                        title: "No Sneakers",
+                        message: "You don't have any sneakers in your collection.\n Press the plus sign above to add.") {
+                            NavigationLink(destination: SneakerForm(saveAction: viewModel.makeSaveAction(), sneaker: Sneaker(), formTitle: "Add to Collection")) {
                                 Text("Add to collection")
                                     .padding(10)
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
                             }
                         }
-                case .data(let shoes):
-                    List(shoes) { shoe in
-                        ShoeCollectionListItem(shoe: shoe)
+                case .data(let sneakers):
+                    List(sneakers) { sneaker in
+                        SneakerCollectionListItem(sneaker: sneaker)
                     }
                 }
             }
             .navigationTitle("Your Collection")
             .toolbar {
-                NavigationLink(destination: ShoeForm(saveAction: viewModel.makeSaveAction(), shoe: Shoe(), formTitle: "Add to Collection")) {
+                NavigationLink(destination: SneakerForm(saveAction: viewModel.makeSaveAction(), sneaker: Sneaker(), formTitle: "Add to Collection")) {
                     Image(systemName: "plus")
                 }
             }
         }
         .onAppear {
-            viewModel.fetchShoes()
+            viewModel.fetchSneakers()
         }
     }
 }
 
-struct ShoeCollectionListView_Previews: PreviewProvider {
+struct SneakerCollectionListView_Previews: PreviewProvider {
     @MainActor
     private struct ListPreview: View {
-        let state: ShoeListViewModel.ShoeCollectionState
+        let state: SneakerListViewModel.SneakerCollectionState
         
         var body: some View {
-            let shoeRepo = ShoeRepositoryStub(state: state)
-            let viewModel = ShoeListViewModel(shoeCollectionRepo: shoeRepo)
-            ShoeCollectionListView(viewModel: viewModel)
+            let sneakerRepo = SneakerRepositoryStub(state: state)
+            let viewModel = SneakerListViewModel(sneakerCollectionRepo: sneakerRepo)
+            SneakerCollectionListView(viewModel: viewModel)
         }
     }
     
@@ -79,7 +79,7 @@ struct ShoeCollectionListView_Previews: PreviewProvider {
         Group {
             ListPreview(state: .loading)
                 .previewDisplayName("Loading")
-            ListPreview(state: .data(Shoe.shoes))
+            ListPreview(state: .data(Sneaker.sneakers))
                 .previewDisplayName("With Data")
             ListPreview(state: .error(PreviewError()))
                 .previewDisplayName("Error")

@@ -1,29 +1,29 @@
 //
-//  ShoeCollectionListItem.swift
-//  ShoeGame
+//  SneakerCollectionListItem.swift
+//  SneakerGame
 //
 //  Created by Elliot Hannah III on 4/24/23.
 //
 
 import SwiftUI
 
-struct ShoeCollectionListItem: View {
-    let shoe: Shoe
+struct SneakerCollectionListItem: View {
+    let sneaker: Sneaker
     
     var body: some View {
         HStack {
-            ShoeImageView(imageName: shoe.currentPhoto ?? "blank")
+            SneakerImageView(imageName: sneaker.currentPhoto ?? "blank")
             Spacer()
-            NavigationLink(destination: ShoeDetailView(shoe: shoe)) {
+            NavigationLink(destination: SneakerDetailView(sneaker: sneaker)) {
                 VStack(alignment: .leading) {
-                    Text(shoe.shoeName)
+                    Text(sneaker.sneakerName)
                         .font(.body)
                         .fontWeight(.bold)
                     Spacer()
                     HStack {
                         Image(systemName: "clock.arrow.circlepath")
                             .foregroundColor(.gray)
-                        Text(shoe.shoeHistory.lastWorn?.formatted(date: .abbreviated, time: .omitted) ?? "Never")
+                        Text(sneaker.sneakerHistory.lastWorn?.formatted(date: .abbreviated, time: .omitted) ?? "Never")
                             .font(.footnote)
                             .foregroundColor(.gray)
                             .fontWeight(.semibold)
@@ -37,7 +37,7 @@ struct ShoeCollectionListItem: View {
     }
 }
 
-private struct ShoeImageView: View {
+private struct SneakerImageView: View {
     let imageName: String
     
     var body: some View {
@@ -48,15 +48,15 @@ private struct ShoeImageView: View {
     }
 }
 
-struct ShoeCollectionListItem_Previews: PreviewProvider {
+struct SneakerCollectionListItem_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            ShoeCollectionListItem(shoe: Shoe.shoe1)
+            SneakerCollectionListItem(sneaker: Sneaker.sneaker1)
         }
         .previewDisplayName("With Image")
 
         List {
-            ShoeCollectionListItem(shoe: Shoe(brand: .adidas, model: "Yeezy 700", colorWay: "WaveRunner", gender: Shoe.genders[0], size: Shoe.sizeRanges[12], dominantMaterial: .nubuck, wornTotal: 0, currentCondition: Shoe.conditionGrades[3], shoeHistory: ShoeHistory(lastActivityWorn: [.none], dateAdded: Date()), isFavorite: false, currentlyWearing: false))
+            SneakerCollectionListItem(sneaker: Sneaker(brand: .adidas, model: "Yeezy 700", colorWay: "WaveRunner", gender: Sneaker.genders[0], size: Sneaker.sizeRanges[12], dominantMaterial: .nubuck, wornTotal: 0, currentCondition: Sneaker.conditionGrades[3], sneakerHistory: SneakerHistory(lastActivityWorn: [.none], dateAdded: Date()), isFavorite: false, currentlyWearing: false))
         }
         .previewDisplayName("No Image")
         
