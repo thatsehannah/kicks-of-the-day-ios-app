@@ -9,6 +9,22 @@ import SwiftUI
 
 struct SneakerCollectionListView: View {
     @StateObject var viewModel = SneakerListViewModel()
+    @State private var newSneaker = Sneaker()
+    @State private var isFormPresenting = false
+    @State private var formState = SneakerForm.FormState.idle
+    
+    private func save(sneaker: Sneaker) {
+        formState = .working
+        Task {
+            do {
+                try await viewModel.add(sneaker: sneaker)
+                formState = .idle
+            } catch {
+                print("[SneakerCollectionListView] Cannot make changes to collection: \(error)")
+                formState = .error
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -33,23 +49,62 @@ struct SneakerCollectionListView: View {
                 case .empty:
                     EmptyListView(
                         title: "No Sneakers",
-                        message: "You don't have any sneakers in your collection.\n Press the plus sign above to add.") {
-                            NavigationLink(destination: SneakerForm(saveAction: viewModel.makeSaveAction(), sneaker: Sneaker(), formTitle: "Add to Collection")) {
-                                Text("Add to collection")
+                        message: "You don't have any sneakers in your collection") {
+                            Button(action: {
+                                newSneaker = Sneaker()
+                                isFormPresenting = true
+                            }) {
+                                Text("Add to Collection")
                                     .padding(10)
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
                             }
                         }
                 case .data(let sneakers):
                     List(sneakers) { sneaker in
-                        SneakerCollectionListItem(sneaker: sneaker)
+                        let sneakerBinding = Binding<Sneaker>(
+                            get: { viewModel.sneakers.first(where: { $0.id == sneaker.id }) ?? sneaker },
+                            set: { updatedSneaker in
+                                if let index = viewModel.sneakers.firstIndex(where: { $0.id == updatedSneaker.id }) {
+                                    viewModel.sneakers[index] = updatedSneaker
+                                }
+                            }
+                        )
+                        SneakerCollectionListItem(sneaker: sneakerBinding)
                     }
                 }
             }
             .navigationTitle("Your Collection")
             .toolbar {
-                NavigationLink(destination: SneakerForm(saveAction: viewModel.makeSaveAction(), sneaker: Sneaker(), formTitle: "Add to Collection")) {
-                    Image(systemName: "plus")
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        newSneaker = Sneaker()
+                        isFormPresenting = true
+                    }, label: {
+                        Image(systemName: "plus")
+                    })
+                }
+            }
+            .sheet(isPresented: $isFormPresenting) {
+                NavigationView {
+                    SneakerForm(sneaker: $newSneaker, formState: $formState)
+                        .navigationTitle("Add To Collection")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Cancel", action: {
+                                    isFormPresenting = false
+                                })
+                                .font(.body)
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button("Save", action: {
+                                    save(sneaker: newSneaker)
+                                    isFormPresenting = false
+                                })
+                                .padding(.leading)
+                                .font(.body)
+                                .disabled(newSneaker.brand == .none || newSneaker.model.isEmpty || newSneaker.colorWay.isEmpty || newSneaker.dominantMaterial == .none)
+                            }
+                        }
                 }
             }
         }

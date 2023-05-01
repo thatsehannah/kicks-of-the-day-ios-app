@@ -8,9 +8,23 @@
 import SwiftUI
 
 struct SneakerDetailView: View {
-    let sneaker: Sneaker
+    @State var sneaker: Sneaker
+    @State var formState: SneakerForm.FormState = SneakerForm.FormState.idle
     @ObservedObject var viewModel = SneakerListViewModel()
-    @State private var openForm = false
+    @State private var isFormPresenting = false
+    
+    private func update(sneaker: Sneaker) {
+        formState = .working
+        Task {
+            do {
+                try await viewModel.update(sneaker: sneaker)
+                formState = .idle
+            } catch {
+                print("[SneakerDetailView] Cannot make changes to collection: \(error)")
+                formState = .error
+            }
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,15 +33,16 @@ struct SneakerDetailView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                NavigationLink(destination: SneakerForm(saveAction: viewModel.makeSaveAction(), sneaker: sneaker, formTitle: "Edit Sneaker"), isActive: $openForm) {
-                    Button(action: {openForm = true}) {
-                        Text("Edit")
-                    }
-                    .padding(.horizontal)
-                    .foregroundColor(.black)
-                    .background(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
-//                    .offset(x: 155, y: 155)
+                Button(action: {
+                    isFormPresenting = true
+                }) {
+                    Text("Edit")
                 }
+                .padding(.horizontal)
+                .foregroundColor(.black)
+                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
+                //                    .offset(x: 155, y: 155)
+                
             }
             .padding()
             Divider()
@@ -103,6 +118,29 @@ struct SneakerDetailView: View {
                     }
                     .foregroundColor(.black)
                 }
+            }
+        }
+        .sheet(isPresented: $isFormPresenting) {
+            NavigationView {
+                SneakerForm(sneaker: $sneaker, formState: $formState)
+                    .navigationTitle("Edit Sneaker")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel", action: {
+                                isFormPresenting = false
+                            })
+                            .font(.body)
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Save", action: {
+                                update(sneaker: sneaker)
+                                isFormPresenting = false
+                            })
+                            .padding(.leading)
+                            .font(.body)
+                            .disabled(sneaker.brand == .none || sneaker.model.isEmpty || sneaker.colorWay.isEmpty || sneaker.dominantMaterial == .none)
+                        }
+                    }
             }
         }
     }

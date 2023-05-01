@@ -38,11 +38,13 @@ class SneakerListViewModel: ObservableObject {
         }
     }
     
-    func makeSaveAction() -> SneakerForm.FormAction {
-        return { [weak self] sneaker in
-            try await self?.sneakerCollectionRepo.add(sneaker)
-            self?.addSneakerToList(sneaker)
-        }
+    func add(sneaker: Sneaker) async throws {
+        try await sneakerCollectionRepo.add(sneaker)
+        addSneakerToList(sneaker)
+    }
+    
+    func update(sneaker: Sneaker) async throws {
+        try await sneakerCollectionRepo.update(sneaker)
     }
     
     func fetchSneakers() {

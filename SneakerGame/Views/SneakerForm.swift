@@ -8,36 +8,12 @@
 import SwiftUI
 
 struct SneakerForm: View {
-    typealias FormAction = (Sneaker) async throws -> Void
+    @Binding var sneaker: Sneaker
+    @Binding var formState: FormState
     
-    let saveAction: FormAction
-    let formTitle: String
-    @State private var sneaker: Sneaker
-    @State private var state = FormState.idle
-    @Environment(\.dismiss) var dismiss
-    
-    init(saveAction: @escaping FormAction, sneaker: Sneaker, formTitle: String ) {
-        self.saveAction = saveAction
-        _sneaker = State(initialValue: sneaker)
-        self.formTitle = formTitle
-    }
-    
-    enum EditSneakerMode {
-        case add
-        case edit
-    }
-        
-    private func saveSneaker() {
-        Task {
-            state = .working
-            do {
-                try await saveAction(sneaker)
-                
-            } catch {
-                print("[SneakerForm] Cannot add sneaker to collection: \(error)")
-                state = .error
-            }
-        }
+    init(sneaker: Binding<Sneaker>, formState: Binding<FormState> = .constant(FormState.idle)) {
+        _sneaker = sneaker
+        _formState = formState
     }
     
     var body: some View {
@@ -96,34 +72,15 @@ struct SneakerForm: View {
                 }
             }
         }
-        .disabled(state == .working)
+        .disabled(formState == .working)
         .overlay(workingOverlay)
-        .navigationBarTitle(formTitle, displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel", action: {
-                    dismiss()
-                })
-                .font(.body)
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save", action: {
-                    saveSneaker()
-                    dismiss()
-                })
-                .padding(.leading)
-                .font(.body)
-                .disabled(sneaker.brand == .none || sneaker.model.isEmpty || sneaker.colorWay.isEmpty || sneaker.dominantMaterial == .none)
-            }
-        }
-        .alert("Cannot create sneaker", isPresented: $state.isError) {
+        .alert("Cannot create sneaker", isPresented: $formState.isError) {
             Text("Sorry, something wen't wrong")
         }
     }
     
     @ViewBuilder private var workingOverlay: some View {
-        if state == .working {
+        if formState == .working {
             ZStack {
                 Color(white: 0, opacity: 0.35)
                 ProgressView().tint(.white)
@@ -153,11 +110,11 @@ extension SneakerForm {
 struct SneakerForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SneakerForm(saveAction: { _ in }, sneaker: Sneaker(), formTitle: "Add to Collection")
+            SneakerForm(sneaker: .constant(Sneaker()) )
         }
         .previewDisplayName("Adding Sneaker")
         NavigationView {
-            SneakerForm(saveAction: { _ in }, sneaker: Sneaker.sneaker1, formTitle: "Edit Sneaker")
+            SneakerForm(sneaker: .constant(Sneaker.sneaker1))
         }
         .previewDisplayName("Editing Sneaker")
     }

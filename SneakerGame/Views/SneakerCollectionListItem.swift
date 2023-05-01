@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SneakerCollectionListItem: View {
-    let sneaker: Sneaker
+    @Binding var sneaker: Sneaker
     
     var body: some View {
         HStack {
@@ -51,12 +51,12 @@ private struct SneakerImageView: View {
 struct SneakerCollectionListItem_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            SneakerCollectionListItem(sneaker: Sneaker.sneaker1)
+            SneakerCollectionListItem(sneaker: .constant(Sneaker.sneaker1))
         }
         .previewDisplayName("With Image")
 
         List {
-            SneakerCollectionListItem(sneaker: Sneaker(brand: .adidas, model: "Yeezy 700", colorWay: "WaveRunner", gender: Sneaker.genders[0], size: Sneaker.sizeRanges[12], dominantMaterial: .nubuck, wornTotal: 0, currentCondition: Sneaker.conditionGrades[3], sneakerHistory: SneakerHistory(lastActivityWorn: [.none], dateAdded: Date()), isFavorite: false, currentlyWearing: false))
+            SneakerCollectionListItem(sneaker: .constant(Sneaker(brand: .adidas, model: "Yeezy 700", colorWay: "WaveRunner", gender: Sneaker.genders[0], size: Sneaker.sizeRanges[12], dominantMaterial: .nubuck, wornTotal: 0, currentCondition: Sneaker.conditionGrades[3], sneakerHistory: SneakerHistory(lastActivityWorn: [.none], dateAdded: Date()), isFavorite: false, currentlyWearing: false)) )
         }
         .previewDisplayName("No Image")
         

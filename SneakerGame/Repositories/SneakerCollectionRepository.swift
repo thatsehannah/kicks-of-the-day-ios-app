@@ -13,6 +13,7 @@ protocol SneakerRepositoryProtocol {
     func add(_ sneaker: Sneaker) async throws
     func fetchSneakers() async throws -> [Sneaker]
     func delete(_ sneaker: Sneaker) async throws
+    func update(_ sneaker: Sneaker) async throws
 }
 
 struct SneakerCollectionRepository: SneakerRepositoryProtocol {
@@ -29,6 +30,11 @@ struct SneakerCollectionRepository: SneakerRepositoryProtocol {
     func add(_ sneaker: Sneaker) async throws -> Void {
         let document = sneakerCollectionRef.document(sneaker.id.uuidString)
         try await document.setData(from: sneaker)
+    }
+    
+    func update(_ sneaker: Sneaker) async throws -> Void {
+        let document = sneakerCollectionRef.document(sneaker.id.uuidString)
+        try await document.setData(from: sneaker, merge: true)
     }
     
     func delete(_ sneaker: Sneaker) async throws {
@@ -62,12 +68,14 @@ struct SneakerRepositoryStub: SneakerRepositoryProtocol {
     
     func delete(_ sneaker: Sneaker) async throws {}
     
+    func update(_ sneaker: Sneaker) async throws {}
+    
 }
 
 private extension DocumentReference {
     
     //Creates an async wrapper for the setData(from:) method in Cloud Firestore SDK to account for any possible errors that the setData function throws
-    func setData<T: Encodable>(from value: T) async throws {
+    func setData<T: Encodable>(from value: T, merge: Bool = false) async throws {
         return try await withCheckedThrowingContinuation { continuation in
             try! setData(from: value) { error in
                 if let error = error {
