@@ -65,6 +65,7 @@ struct Sneaker: Identifiable, Codable {
     }
     
     enum Brands: String, CaseIterable, Codable {
+        case none = "Select Brand"
         case nike = "Nike"
         case jordan = "Air Jordan"
         case adidas = "Adidas"
@@ -78,10 +79,10 @@ struct Sneaker: Identifiable, Codable {
         case bape = "Bape"
         case crocs = "Crocs"
         case other = "Other"
-        case none = "Select Brand"
     }
     
     enum MaterialTypes: String, CaseIterable, Codable {
+        case none = "Select Material"
         case suede = "Suede"
         case nubuck = "Nubuck"
         case leather = "Leather"
@@ -91,9 +92,7 @@ struct Sneaker: Identifiable, Codable {
         case plastic = "Plastic"
         case foam = "Foam"
         case rubber = "Rubber"
-        case none = "Select Material"
     }
-    
 }
 
 struct SneakerHistory: Codable {

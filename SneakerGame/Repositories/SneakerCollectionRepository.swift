@@ -20,7 +20,7 @@ struct SneakerCollectionRepository: SneakerRepositoryProtocol {
     let sneakerCollectionRef = Firestore.firestore().collection("sneaker_collection")
     
     func fetchSneakers() async throws -> [Sneaker] {
-        let snapshot = try await sneakerCollectionRef.getDocuments()
+        let snapshot = try await sneakerCollectionRef.order(by: "sneakerHistory.dateAdded", descending: true).getDocuments()
         let sneakers = snapshot.documents.compactMap { document in
             try! document.data(as: Sneaker.self)
         }

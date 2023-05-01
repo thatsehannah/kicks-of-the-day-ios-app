@@ -86,7 +86,6 @@ struct SneakerDetailView: View {
                 .padding(.horizontal)
             }
         }
-        
         .navigationBarTitle("Sneaker Detail", displayMode: .inline)
         .safeAreaInset(edge: .bottom) {
             Group {
@@ -100,8 +99,6 @@ struct SneakerDetailView: View {
                     .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 5))
                 }
-                
-                
             }
             .padding()
             
