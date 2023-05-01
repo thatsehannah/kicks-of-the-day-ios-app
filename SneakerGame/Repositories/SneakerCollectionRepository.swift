@@ -10,10 +10,11 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 protocol SneakerRepositoryProtocol {
-    func add(_ sneaker: Sneaker) async throws
     func fetchSneakers() async throws -> [Sneaker]
-    func delete(_ sneaker: Sneaker) async throws
+    func add(_ sneaker: Sneaker) async throws
     func update(_ sneaker: Sneaker) async throws
+    func delete(_ sneaker: Sneaker) async throws
+    func toggleFavorite(_ sneaker: Sneaker) async throws
 }
 
 struct SneakerCollectionRepository: SneakerRepositoryProtocol {
@@ -40,6 +41,12 @@ struct SneakerCollectionRepository: SneakerRepositoryProtocol {
     func delete(_ sneaker: Sneaker) async throws {
         let document = sneakerCollectionRef.document(sneaker.id.uuidString)
         try await document.delete()
+    }
+    
+    func toggleFavorite(_ sneaker: Sneaker) async throws {
+        let value = sneaker.isFavorite ? true : false
+        let document = sneakerCollectionRef.document(sneaker.id.uuidString)
+        try await document.setData(["isFavorite": value], merge: true)
     }
 }
 
@@ -69,6 +76,9 @@ struct SneakerRepositoryStub: SneakerRepositoryProtocol {
     func delete(_ sneaker: Sneaker) async throws {}
     
     func update(_ sneaker: Sneaker) async throws {}
+    
+    func toggleFavorite(_ sneaker: Sneaker) async throws {}
+
     
 }
 

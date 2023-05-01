@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SneakerDetailView: View {
-    @State var sneaker: Sneaker
+    @Binding var sneaker: Sneaker
     @State var formState: SneakerForm.FormState = SneakerForm.FormState.idle
     @ObservedObject var viewModel = SneakerListViewModel()
     @State private var isFormPresenting = false
@@ -22,6 +22,16 @@ struct SneakerDetailView: View {
             } catch {
                 print("[SneakerDetailView] Cannot make changes to collection: \(error)")
                 formState = .error
+            }
+        }
+    }
+    
+    private func toggleFavorite(sneaker: Sneaker) {
+        Task {
+            do {
+                try await viewModel.toggleFavorite(sneaker: sneaker)
+            } catch {
+                print("[SneakerDetailView] Unable to toggle favorite: \(error)")
             }
         }
     }
@@ -106,10 +116,14 @@ struct SneakerDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack {
-                    Button(action: {}) {
-                        Label("Favorite", systemImage: "heart")
+                    Button(action: {
+                        sneaker.isFavorite.toggle()
+                        toggleFavorite(sneaker: sneaker)
+                    }) {
+                        Image(systemName: sneaker.isFavorite ? "heart.fill" : "heart")
                     }
-                    .foregroundColor(.black)
+                    .foregroundColor(sneaker.isFavorite ? .red : .black)
+                    .animation(.default, value: sneaker.isFavorite)
                     Button(action: {}) {
                         Label("Delete", systemImage: "trash")
                     }
@@ -120,7 +134,7 @@ struct SneakerDetailView: View {
         .sheet(isPresented: $isFormPresenting) {
             NavigationView {
                 SneakerForm(sneaker: $sneaker, formState: $formState)
-                    .navigationTitle("Edit Sneaker")
+                    .navigationBarTitle("Edit Sneaker", displayMode: .inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button("Cancel", action: {
@@ -146,7 +160,7 @@ struct SneakerDetailView: View {
 struct SneakerDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SneakerDetailView(sneaker: Sneaker.sneaker2)
+            SneakerDetailView(sneaker: .constant(Sneaker.sneaker2))
         }
         
     }

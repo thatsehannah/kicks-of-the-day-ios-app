@@ -47,6 +47,10 @@ class SneakerListViewModel: ObservableObject {
         try await sneakerCollectionRepo.update(sneaker)
     }
     
+    func toggleFavorite(sneaker: Sneaker) async throws {
+        try await sneakerCollectionRepo.toggleFavorite(sneaker)
+    }
+    
     func fetchSneakers() {
         state = .loading
         Task {

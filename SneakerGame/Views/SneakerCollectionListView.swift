@@ -87,7 +87,7 @@ struct SneakerCollectionListView: View {
             .sheet(isPresented: $isFormPresenting) {
                 NavigationView {
                     SneakerForm(sneaker: $newSneaker, formState: $formState)
-                        .navigationTitle("Add To Collection")
+                        .navigationBarTitle("Add to Collection", displayMode: .inline)
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button("Cancel", action: {

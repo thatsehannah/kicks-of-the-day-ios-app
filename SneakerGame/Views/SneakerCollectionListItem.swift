@@ -14,7 +14,7 @@ struct SneakerCollectionListItem: View {
         HStack {
             SneakerImageView(imageName: sneaker.currentPhoto ?? "blank")
             Spacer()
-            NavigationLink(destination: SneakerDetailView(sneaker: sneaker)) {
+            NavigationLink(destination: SneakerDetailView(sneaker: $sneaker)) {
                 VStack(alignment: .leading) {
                     Text(sneaker.sneakerName)
                         .font(.body)
