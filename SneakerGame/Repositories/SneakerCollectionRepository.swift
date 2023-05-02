@@ -38,7 +38,7 @@ struct SneakerCollectionRepository: SneakerRepositoryProtocol {
         try await document.setData(from: sneaker, merge: true)
     }
     
-    func delete(_ sneaker: Sneaker) async throws {
+    func delete(_ sneaker: Sneaker) async throws -> Void {
         let document = sneakerCollectionRef.document(sneaker.id.uuidString)
         try await document.delete()
     }

@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 @MainActor
 class SneakerListViewModel: ObservableObject {
     @Published var sneakers = [Sneaker]()
@@ -26,21 +24,9 @@ class SneakerListViewModel: ObservableObject {
         case error(Error)
     }
     
-    private func addSneakerToList(_ sneaker: Sneaker) {
-        switch state {
-        case .empty, .loading:
-            state = .data([sneaker])
-        case .data(var sneakers):
-            sneakers.append(sneaker)
-            state = .data(sneakers)
-        case .error(_):
-            break
-        }
-    }
-    
     func add(sneaker: Sneaker) async throws {
         try await sneakerCollectionRepo.add(sneaker)
-        addSneakerToList(sneaker)
+        fetchSneakers()
     }
     
     func update(sneaker: Sneaker) async throws {
@@ -49,6 +35,11 @@ class SneakerListViewModel: ObservableObject {
     
     func toggleFavorite(sneaker: Sneaker) async throws {
         try await sneakerCollectionRepo.toggleFavorite(sneaker)
+    }
+    
+    func delete(sneaker: Sneaker) async throws {
+        try await sneakerCollectionRepo.delete(sneaker)
+        fetchSneakers()
     }
     
     func fetchSneakers() {

@@ -69,8 +69,9 @@ struct SneakerCollectionListView: View {
                                 }
                             }
                         )
-                        SneakerCollectionListItem(sneaker: sneakerBinding)
+                        SneakerCollectionListItem(sneaker: sneakerBinding).environmentObject(viewModel)
                     }
+//                    .animation(.default, value: sneakers)
                 }
             }
             .navigationTitle("Your Collection")

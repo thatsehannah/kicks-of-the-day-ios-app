@@ -9,12 +9,13 @@ import SwiftUI
 
 struct SneakerCollectionListItem: View {
     @Binding var sneaker: Sneaker
+    @EnvironmentObject var viewModel: SneakerListViewModel
     
     var body: some View {
         HStack {
             SneakerImageView(imageName: sneaker.currentPhoto ?? "blank")
             Spacer()
-            NavigationLink(destination: SneakerDetailView(sneaker: $sneaker)) {
+            NavigationLink(destination: SneakerDetailView(sneaker: $sneaker).environmentObject(viewModel)) {
                 VStack(alignment: .leading) {
                     Text(sneaker.sneakerName)
                         .font(.body)
@@ -31,7 +32,6 @@ struct SneakerCollectionListItem: View {
                 }
                 .frame(width: 150, alignment: .leading)
             }
-            
         }
         .padding(.vertical)
     }

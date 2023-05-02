@@ -10,8 +10,10 @@ import SwiftUI
 struct SneakerDetailView: View {
     @Binding var sneaker: Sneaker
     @State var formState: SneakerForm.FormState = SneakerForm.FormState.idle
-    @ObservedObject var viewModel = SneakerListViewModel()
+    @EnvironmentObject var viewModel: SneakerListViewModel
     @State private var isFormPresenting = false
+    @State private var showConfirmationDialog = false
+    @Environment(\.dismiss) private var dismiss
     
     private func update(sneaker: Sneaker) {
         formState = .working
@@ -32,6 +34,16 @@ struct SneakerDetailView: View {
                 try await viewModel.toggleFavorite(sneaker: sneaker)
             } catch {
                 print("[SneakerDetailView] Unable to toggle favorite: \(error)")
+            }
+        }
+    }
+    
+    private func delete(sneaker: Sneaker) {
+        Task {
+            do {
+                try await viewModel.delete(sneaker: sneaker)
+            } catch {
+                print("[SneakerDetailView] Cannot delete sneaker: \(error)")
             }
         }
     }
@@ -111,7 +123,6 @@ struct SneakerDetailView: View {
                 }
             }
             .padding()
-            
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -124,12 +135,20 @@ struct SneakerDetailView: View {
                     }
                     .foregroundColor(sneaker.isFavorite ? .red : .black)
                     .animation(.default, value: sneaker.isFavorite)
-                    Button(action: {}) {
+                    Button(action: {
+                        showConfirmationDialog = true
+                    }) {
                         Label("Delete", systemImage: "trash")
                     }
                     .foregroundColor(.black)
                 }
             }
+        }
+        .confirmationDialog("Are you sure you want to delete this sneaker from your collection?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+            Button("Delete", role: .destructive, action: {
+                delete(sneaker: sneaker)
+                dismiss()
+            })
         }
         .sheet(isPresented: $isFormPresenting) {
             NavigationView {
