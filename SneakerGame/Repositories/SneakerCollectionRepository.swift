@@ -50,6 +50,7 @@ struct SneakerCollectionRepository: SneakerRepositoryProtocol {
     }
 }
 
+#if DEBUG
 struct SneakerRepositoryStub: SneakerRepositoryProtocol {
     let state: SneakerListViewModel.SneakerCollectionState
     
@@ -78,9 +79,8 @@ struct SneakerRepositoryStub: SneakerRepositoryProtocol {
     func update(_ sneaker: Sneaker) async throws {}
     
     func toggleFavorite(_ sneaker: Sneaker) async throws {}
-
-    
 }
+#endif
 
 private extension DocumentReference {
     

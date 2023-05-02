@@ -16,7 +16,7 @@ struct SneakerGame: App {
     
     var body: some Scene {
         WindowGroup {
-            SneakerCollectionListView()
+            MainTabView()
         }
     }
 }

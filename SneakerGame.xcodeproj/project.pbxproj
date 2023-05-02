@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD446C5D2A0155D700D3D618 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD446C5C2A0155D700D3D618 /* WeatherService.swift */; };
+		BD446C5F2A0157E300D3D618 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD446C5E2A0157E300D3D618 /* Weather.swift */; };
+		BD446C612A01913C00D3D618 /* SneakerRotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD446C602A01913C00D3D618 /* SneakerRotationView.swift */; };
+		BD446C632A01935F00D3D618 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD446C622A01935F00D3D618 /* WeatherViewModel.swift */; };
+		BD446C652A0197A900D3D618 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD446C642A0197A900D3D618 /* MainTabView.swift */; };
+		BD446C672A01993100D3D618 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD446C662A01993100D3D618 /* WeatherView.swift */; };
 		BD9A704429F73C84000A265D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BD9A704329F73C84000A265D /* .gitignore */; };
 		BD9A704A29F73F68000A265D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD9A704929F73F68000A265D /* GoogleService-Info.plist */; };
 		BD9A704D29F7498A000A265D /* Sneaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A704C29F7498A000A265D /* Sneaker.swift */; };
@@ -28,6 +34,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD446C5C2A0155D700D3D618 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		BD446C5E2A0157E300D3D618 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		BD446C602A01913C00D3D618 /* SneakerRotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakerRotationView.swift; sourceTree = "<group>"; };
+		BD446C622A01935F00D3D618 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		BD446C642A0197A900D3D618 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		BD446C662A01993100D3D618 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		BD9A704329F73C84000A265D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		BD9A704929F73F68000A265D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD9A704C29F7498A000A265D /* Sneaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sneaker.swift; sourceTree = "<group>"; };
@@ -60,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD446C5B2A00C9B200D3D618 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BD446C5C2A0155D700D3D618 /* WeatherService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		BD9A703F29F73C20000A265D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +89,8 @@
 				BD9A705029F74DF6000A265D /* SneakerCollectionListItem.swift */,
 				BD9A705229F7602D000A265D /* SneakerForm.swift */,
 				BD9A706529FBB612000A265D /* SneakerDetailView.swift */,
+				BD446C602A01913C00D3D618 /* SneakerRotationView.swift */,
+				BD446C642A0197A900D3D618 /* MainTabView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -87,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				BD9A704C29F7498A000A265D /* Sneaker.swift */,
+				BD446C5E2A0157E300D3D618 /* Weather.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -95,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				BD9A705529F789BD000A265D /* SneakerListViewModel.swift */,
+				BD446C622A01935F00D3D618 /* WeatherViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -107,17 +131,11 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
-		BD9A706129F99ED2000A265D /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		BD9A706229F9A30F000A265D /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
 				BD9A706329F9A333000A265D /* EmptyListView.swift */,
+				BD446C662A01993100D3D618 /* WeatherView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -141,7 +159,7 @@
 		BDBC111929F738A000D65074 /* SneakerGame */ = {
 			isa = PBXGroup;
 			children = (
-				BD9A706129F99ED2000A265D /* Utilities */,
+				BD446C5B2A00C9B200D3D618 /* Services */,
 				BD9A705729F84E0D000A265D /* Repositories */,
 				BD9A705429F7898A000A265D /* ViewModels */,
 				BD9A704B29F7494A000A265D /* Models */,
@@ -244,14 +262,20 @@
 			files = (
 				BD9A704D29F7498A000A265D /* Sneaker.swift in Sources */,
 				BD9A705129F74DF6000A265D /* SneakerCollectionListItem.swift in Sources */,
+				BD446C5D2A0155D700D3D618 /* WeatherService.swift in Sources */,
+				BD446C632A01935F00D3D618 /* WeatherViewModel.swift in Sources */,
 				BD9A705929F84E46000A265D /* SneakerCollectionRepository.swift in Sources */,
+				BD446C5F2A0157E300D3D618 /* Weather.swift in Sources */,
 				BD9A704F29F74D9C000A265D /* SneakerCollectionListView.swift in Sources */,
+				BD446C672A01993100D3D618 /* WeatherView.swift in Sources */,
 				BDBC111D29F738A000D65074 /* ContentView.swift in Sources */,
 				BD9A705629F789BD000A265D /* SneakerListViewModel.swift in Sources */,
 				BD9A706629FBB612000A265D /* SneakerDetailView.swift in Sources */,
 				BDBC111B29F738A000D65074 /* SneakerGame.swift in Sources */,
+				BD446C612A01913C00D3D618 /* SneakerRotationView.swift in Sources */,
 				BD9A705329F7602D000A265D /* SneakerForm.swift in Sources */,
 				BD9A706429F9A333000A265D /* EmptyListView.swift in Sources */,
+				BD446C652A0197A900D3D618 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +407,7 @@
 				DEVELOPMENT_TEAM = QQC7URH972;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location to best recommend the appropriate sneakers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -413,6 +438,7 @@
 				DEVELOPMENT_TEAM = QQC7URH972;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location to best recommend the appropriate sneakers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
