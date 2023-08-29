@@ -1,5 +1,5 @@
 # Kicks Of The Day (KOTD) app
-iOS app that selects a sneaker for you to wear for the day
+Formerly known as the "The Sneaker Game"
 
 - This is digital sneaker collection app tailored to suggest footwear choices based on real-time local weather conditions
 - Pioneering an intuitive user interface using SwiftUI
